@@ -1,7 +1,7 @@
-from word_gen_facede import GeraPalavra
+from pickle import NONE
 
 
-class RecebeLetra:   
+class RecebeLetra:  
     
     def ler_arquivo_temp(self):
 
@@ -14,39 +14,45 @@ class RecebeLetra:
 
         return palavra_da_rodada
 
-    def jogada(self, param):
-        tentativa = 0
-        acertos = 0
-        erro = True
-        letra = param
-        chances = 7
-        palavra_retorno = None
-        
-
-        palavra_secreta = self.ler_arquivo_temp()
-
-        palavra_retorno = []
-        for k in enumerate(palavra_secreta):
+    def oculta_palavra(self):
+        palava_oculta = None
+        palava_oculta = []
+        palavra = self.ler_arquivo_temp()
+        for k in enumerate(palavra):
             if k:
-                palavra_retorno.append("_")
-        palavra = palavra_secreta
-        palavraOculta = palavra_retorno
+                palava_oculta.append("_")
+        return palava_oculta
+    
+    def jogada(self, param: dict):
+        lacunas   = 0
+        tentativa = 0
+        acertos   = 0
+        letra     = param["letter"]
+        status    = ""
+        chances   = 7
+        palavra   = self.ler_arquivo_temp
+        oculto    = self.oculta_palavra        
         
         for i, char in enumerate(palavra):
             if char == letra:
-                erro = False
-                palavraOculta[i] = letra
-                acertos += 1
-                              
+                oculto[i] = letra
+                acertos = acertos + 1
+                print("log acertos", acertos)
+                return 'acerto'  
+            else:
+                tentativa = tentativa + 1
+                print("log tentativa", tentativa)
+                return 'erro'
 
-                if acertos == enumerate(palavra):
-                    return ('vitoria')
-        if erro == True:
-            tentativa += 1
-            if tentativa == chances:
-                return('derrota')
+        if tentativa == chances:
+            status == "Derrota"
+            
+
+        if acertos == enumerate(palavra):                
+            status == "Vitoria"
+            
         
 
-if __name__ == "__main__":
-    varClass = RecebeLetra()
-    varClass.jogada("r")
+# if __name__ == "__main__":
+#     varClass = RecebeLetra()
+#     varClass.jogada("r")

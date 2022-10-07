@@ -1,14 +1,8 @@
-from flask import Flask,render_template,redirect,request
+from flask_cors                      import CORS
+from flask                           import Flask,render_template,redirect,request
+import view.bp.root_blueprint       as root 
 
-import model.facade.functions as functions
-  
 app = Flask(__name__) 
-
-secret_word = None
-word_set = None
-to_display = None
-tries = None
-blanks = None
 
 
 @app.after_request
@@ -18,18 +12,12 @@ def set_response_headers(response):
     response.headers['Expires'] = '0'
     return response
   
-@app.route('/') 
-def hello_world(): 
-    return ('home')
+def create_app():
 
+    app = Flask(__name__)
+    CORS(app)
 
-@app.route('/game_lost')
-def game_lost_landing():
-	return ('lose')
+    root.init_app(app)
 
-@app.route('/game_won')
-def game_won_landing():
-	return ('won')
+    return app
 
-if __name__ == '__main__': 
-    app.run() 

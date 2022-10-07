@@ -1,4 +1,4 @@
-from word_gen_facede import GeraPalavra
+from util.word_gen import GeraPalavra
 
 class CriaPalvraTemp:   
     
