@@ -5,7 +5,7 @@ Backend da aplicação web-app de forca, utilizando python com flask
 
 * Install pip
 
-* python3 -m venv <env-name>
+* python -m venv <env-name> (If there's no venv on root, you neet to create one virtual env)
 
 * Activate de venv
 
