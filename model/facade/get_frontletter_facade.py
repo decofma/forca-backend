@@ -1,8 +1,14 @@
 from pickle import NONE
 
 
-class RecebeLetra:  
-    
+class RecebeLetra: 
+
+    def __init__(self):
+        self.contador = 0 
+        self.tentativa = 0
+        self.acertos = 0
+        self.chances = 7
+
     def ler_arquivo_temp(self):
 
         arquivo = "arquivo_palavra_temp.txt"
@@ -22,37 +28,40 @@ class RecebeLetra:
             if k:
                 palava_oculta.append("_")
         return palava_oculta
-    
+
+
     def jogada(self, param: dict):
-        lacunas   = 0
-        tentativa = 0
-        acertos   = 0
         letra     = param["letter"]
         status    = ""
-        chances   = 7
-        palavra   = self.ler_arquivo_temp
+        palavra   = self.ler_arquivo_temp()
+        print("***********************************")
+        print ("log jogada palavra", palavra, type(palavra))
+        print("***********************************")
         oculto    = self.oculta_palavra        
         
         for i, char in enumerate(palavra):
+            print("***********************************")
+            print ("log jogada i e char", i, char)
+            print("***********************************")
             if char == letra:
                 oculto[i] = letra
-                acertos = acertos + 1
-                print("log acertos", acertos)
+                self.acertos = self.acertos + 1
+                print("log acertos", self.acertos)
                 return 'acerto'  
             else:
-                tentativa = tentativa + 1
-                print("log tentativa", tentativa)
+                self.tentativa = self.tentativa + 1
+                print("log tentativa", self.tentativa)
                 return 'erro'
 
-        if tentativa == chances:
+        if self.tentativa == self.chances:
             status == "Derrota"
             
 
-        if acertos == enumerate(palavra):                
+        if self.acertos == enumerate(palavra):                
             status == "Vitoria"
             
-        
+         
 
-# if __name__ == "__main__":
-#     varClass = RecebeLetra()
-#     varClass.jogada("r")
+if __name__ == "__main__":
+    varClass = RecebeLetra()
+    varClass.jogada("r")
